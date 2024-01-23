@@ -8,12 +8,8 @@ const Button = ({onClick, text}) => {
   return <button onClick={onClick}>{text}</button>;
 };
 
-const Review = ({text}) => {
+const Statistics = ({text}) => {
   return <p>{text}</p>
-}
-
-const Stat = ({all}) => {
-  return <p>{all}</p>
 }
 
 const App = () => {
@@ -48,11 +44,11 @@ const App = () => {
       <Button onClick={handleNeutral} text='Neutral' />
       <Button onClick={handleBad} text='Bad' />
       <Header text="Statistics" />
-      <Review text={"Good: " + good} />
-      <Review text={"Neutral: " + neutral} />
-      <Review text={"Bad: " + bad} />
-      <Stat all={"All: " + all} />
-      <Stat all={"Average: " + average} />
+      <Statistics text={"Good: " + good} />
+      <Statistics text={"Neutral: " + neutral} />
+      <Statistics text={"Bad: " + bad} />
+      <Statistics text={"All: " + all} />
+      <Statistics text={"Average: " + average} />
     </>
   );
 };
