@@ -8,6 +8,15 @@ const Button = ({ onClick, text }) => {
   return <button onClick={onClick}>{text}</button>;
 };
 
+const StatisticLine = ({ text, value }) => {
+  return (
+    <tr>
+      <td>{text}</td>
+      <td>{value}</td>
+    </tr>
+  );
+};
+
 const Statistics = ({ clicks }) => {
   if (clicks.all == 0) {
     return <p>No feedback given.</p>;
@@ -15,14 +24,16 @@ const Statistics = ({ clicks }) => {
     const calcPercent = (clicks.good / clicks.all) * 100;
     const calcAverage = (clicks.good - clicks.bad) / clicks.all;
     return (
-      <>
-        <p>Good: {clicks.good}</p>
-        <p>Neutral: {clicks.neutral}</p>
-        <p>Bad: {clicks.bad}</p>
-        <p>All: {clicks.all}</p>
-        <p>Average: {calcAverage}</p>
-        <p>Percent: {calcPercent}%</p>
-      </>
+      <table>
+        <tbody>
+          <StatisticLine text="Good:" value={clicks.good} />
+          <StatisticLine text="Neutral:" value={clicks.neutral} />
+          <StatisticLine text="Bad:" value={clicks.bad} />
+          <StatisticLine text="All:" value={clicks.all} />
+          <StatisticLine text="Average:" value={calcAverage} />
+          <StatisticLine text="Percent:" value={calcPercent + "%"} />
+        </tbody>
+      </table>
     );
   }
 };
