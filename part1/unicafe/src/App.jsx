@@ -8,15 +8,23 @@ const Button = ({ onClick, text }) => {
   return <button onClick={onClick}>{text}</button>;
 };
 
-const Statistics = ({ text, clicks, percent, average }) => {
-  if (percent == true) {
+const Statistics = ({ clicks }) => {
+  if (clicks.all == 0) {
+    return <p>No feedback given.</p>;
+  } else {
     const calcPercent = (clicks.good / clicks.all) * 100;
-    return <p>{text} {calcPercent}%</p>;
-  } else if (average == true) {
-    const calcAverage = ( clicks.good - clicks.bad ) / clicks.all;
-    return <p>{text} {calcAverage}</p>
+    const calcAverage = (clicks.good - clicks.bad) / clicks.all;
+    return (
+      <>
+        <p>Good: {clicks.good}</p>
+        <p>Neutral: {clicks.neutral}</p>
+        <p>Bad: {clicks.bad}</p>
+        <p>All: {clicks.all}</p>
+        <p>Average: {calcAverage}</p>
+        <p>Percent: {calcPercent}%</p>
+      </>
+    );
   }
-  return <p>{text}</p>;
 };
 
 const App = () => {
@@ -46,12 +54,7 @@ const App = () => {
       <Button onClick={handleNeutral} text="Neutral" />
       <Button onClick={handleBad} text="Bad" />
       <Header text="Statistics" />
-      <Statistics clicks={clicks} text={"Good: " + clicks.good} />
-      <Statistics clicks={clicks} text={"Neutral: " + clicks.neutral} />
-      <Statistics clicks={clicks} text={"Bad: " + clicks.bad} />
-      <Statistics clicks={clicks} text={"All: " + clicks.all} />
-      <Statistics clicks={clicks} average={true} text={"Average: "} />
-      <Statistics clicks={clicks} percent={true} text="Percent: " />
+      <Statistics clicks={clicks} />
     </>
   );
 };
